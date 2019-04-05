@@ -1,6 +1,8 @@
+// Function to handle getting the dog images
 function fetchPictures() {
     $('form').submit(function(event) {
         event.preventDefault();
+        // Clears any previous images that were on the page from a past request
         $('.results-img').remove();
         let numDogPics = $('#number').val();
         let dogBreed = $('#breed').val();
@@ -9,12 +11,15 @@ function fetchPictures() {
         fetch(`https://dog.ceo/api/breed/hound-${dogBreed}/images/random/${numDogPics}`)
             .then(response => response.json())
             .then(responseJson => displayPictures(responseJson))
+            // Catches all non-404 errors
             .catch(error => alert(`Please contact the system administrator.`))
     })
 };
 
+// Displays the images in the DOM
 function displayPictures(responseJson) {
-    if (responseJson.status !== "success") {
+    // Catches the 404 error returned by the API when a breed isn't found
+    if (responseJson.code == "404") {
         alert(`${responseJson.message}`);
     } else {
     console.log(responseJson);
@@ -24,4 +29,5 @@ function displayPictures(responseJson) {
     };
 };
 
+// Loads the fetch function into the DOM when the app is loaded
 $(fetchPictures());
