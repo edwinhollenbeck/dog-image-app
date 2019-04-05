@@ -1,0 +1,16 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin-left: 1em;
+}
+
+.results-img {
+    display: block;
+    margin-top: 5%;
+}
+
+.results-img:last-of-type {
+    margin-bottom: 5%;
+}
